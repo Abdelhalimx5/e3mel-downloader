@@ -1,0 +1,9 @@
+# Build packages (uploaded via GitHub Releases, not stored in the repo)
+e3mel-downloader-*.zip
+e3mel-downloader-*.xpi
+
+# Python (local server)
+__pycache__/
+*.pyc
+*.pyo
+.env

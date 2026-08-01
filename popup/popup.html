@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Cairo:wght@400;500;600;700;800&family=Readex+Pro:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+    <header class="top-bar">
+      <div class="brand-col">
+        <div class="server-pill" id="server-pill">
+          <span class="pill-dot"></span>
+          <span class="pill-text"></span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="theme-toggle" id="theme-toggle" title="الوضع الليلي">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="sidebar-btn" id="sidebar-btn" title="فتح في الشريط الجانبي">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+        </button>
+        <button class="settings-btn" id="settings-btn" title="الإعدادات">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="main" id="main">
+      <button class="scan-btn" id="scan-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <span>استخراج الدرس الحالي</span>
+        <kbd>Scan</kbd>
+      </button>
+
+      <div class="mode-seg" id="mode-seg" style="display:none">
+        <button class="seg-btn active" data-mode="current">الدرس الحالي</button>
+        <button class="seg-btn" data-mode="all">كل الدروس</button>
+      </div>
+
+      <div class="state" id="loading-state">
+        <div class="pulse"></div>
+        <span>جاري فحص الصفحة...</span>
+      </div>
+
+      <div class="state" id="empty-state">
+        <div class="empty-art">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/>
+            <line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/>
+            <line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/>
+            <line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/>
+            <line x1="17" y1="17" x2="22" y2="17"/>
+          </svg>
+        </div>
+        <p>افتح صفحة كورس ثم اضغط «استخراج»</p>
+      </div>
+
+      <div id="video-list"></div>
+    </div>
+
+    <footer class="bottom">
+      <div class="quota-banner" id="quota-banner" style="display:none"></div>
+      <div class="plan-row" id="plan-row">
+        <div class="plan-cluster">
+          <span class="plan-badge" id="plan-badge">مجاني</span>
+          <span class="plan-hint" id="plan-hint"></span>
+          <div class="plan-form" id="plan-form">
+            <input type="text" id="vip-input" placeholder="رمز_الاشتراك:التوقيع" autocomplete="off" spellcheck="false">
+            <button id="vip-activate" class="plan-btn">تفعيل</button>
+          </div>
+        </div>
+        <button class="plan-cta" id="plan-cta">ترقية VIP</button>
+        <button class="plan-cta plan-leave" id="plan-leave" style="display:none">تسجيل الخروج</button>
+      </div>
+      <span id="page-label" class="page-label"></span>
+    </footer>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="qmodal" id="qmodal">
+      <div class="qmodal-handle"></div>
+      <div class="qmodal-head">
+        <div class="qmodal-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+          <span>اختر الجودة</span>
+        </div>
+        <button class="qmodal-close" id="qmodal-close">&times;</button>
+      </div>
+      <div class="qmodal-loading" id="qmodal-loading">
+        <div class="pulse"></div>
+        <span>جاري تحميل القائمة...</span>
+      </div>
+      <div class="qmodal-list" id="qmodal-list"></div>
+    </div>
+
+    <div class="settings-overlay" id="settings-overlay"></div>
+    <div class="settings-panel" id="settings-panel">
+      <div class="settings-handle"></div>
+      <div class="settings-head">
+        <div class="settings-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>الإعدادات</span>
+        </div>
+        <button class="settings-close" id="settings-close">&times;</button>
+      </div>
+      <div class="settings-body">
+        <div class="settings-group">
+          <div class="setting-item font-item">
+            <div class="setting-info">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+              <span>خط الواجهة</span>
+            </div>
+          </div>
+          <div class="font-options" id="font-options">
+            <button class="font-opt" data-font="tajawal" style="font-family:'Tajawal',sans-serif">Tajawal</button>
+            <button class="font-opt" data-font="cairo" style="font-family:'Cairo',sans-serif">Cairo</button>
+            <button class="font-opt" data-font="readex" style="font-family:'Readex Pro',sans-serif">Readex Pro</button>
+            <button class="font-opt" data-font="amiri" style="font-family:'Amiri',serif">Amiri</button>
+          </div>
+        </div>
+        <div class="settings-group">
+          <h3>تواصل معنا</h3>
+          <div class="settings-social-links">
+            <a class="settings-social-link" href="https://www.instagram.com/abdelhalim.officiel/" target="_blank" rel="noopener noreferrer">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1"></circle></svg>
+              <span>Instagram</span>
+            </a>
+            <a class="settings-social-link" href="https://t.me/GurusVIP" target="_blank" rel="noopener noreferrer">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3 11 14"></path><path d="M22 3 15 21 11 14 3 10 22 3Z"></path></svg>
+              <span>Telegram</span>
+            </a>
+            <a class="settings-social-link" href="https://www.facebook.com/CIH.xD" target="_blank" rel="noopener noreferrer">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              <span>Facebook</span>
+            </a>
+          </div>
+        </div>
+        <div class="settings-group">
+          <h3>حول الإضافة</h3>
+          <div class="settings-about">
+            <div class="settings-version">e3mel Business Downloader · v2.2.0</div>
+            <a href="https://github.com/Abdelhalimx5/e3mel-downloader/releases" target="_blank" rel="noopener noreferrer">التحديثات وطريقة التثبيت</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

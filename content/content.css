@@ -1,0 +1,81 @@
+.e3mel-dl-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 99999;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #28aa5c, #1a8855);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: all 0.2s;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+.e3mel-dl-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 170, 92, 0.4);
+}
+
+.e3mel-dl-btn:active {
+  transform: translateY(0);
+}
+
+.e3mel-dl-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.e3mel-dl-menu {
+  position: absolute;
+  top: 46px;
+  left: 10px;
+  z-index: 99999;
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  min-width: 160px;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}
+
+.e3mel-dl-menu-item {
+  padding: 8px 12px;
+  color: #eee;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 13px;
+  text-align: right;
+}
+
+.e3mel-dl-menu-item:hover {
+  background: #28aa5c;
+}
+
+.e3mel-dl-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999999;
+  padding: 12px 20px;
+  background: #28aa5c;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  animation: e3mel-toast-in 0.3s ease;
+}
+
+@keyframes e3mel-toast-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
